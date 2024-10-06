@@ -1,0 +1,45 @@
+{% extends 'basic.html' %} {% load static %} {% block title %}Add Author and
+Book{%endblock%} {%block content%}
+<section>
+  <h2>Add Author</h2>
+
+  <!-- Уведомления об успехе -->
+  {% if success_message %}
+  <div class="success-message">{{ success_message }}</div>
+  {% endif %}
+
+  <!-- Уведомления об ошибках -->
+  {% if errors %}
+  <div class="error-message">
+    <ul>
+      {% for field, error_list in errors.items %}
+      <li>{{ field }}: {{ error_list|join:", " }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <form action="{% url 'create_author' %}" method="post">
+    {% csrf_token %}
+    <label for="author-name">Name:</label>
+    <input type="text" id="author-name" name="name" required />
+    <button type="submit">Add Author</button>
+  </form>
+</section>
+
+<section>
+  <h2>Add Book</h2>
+  <form action="{% url 'create_book' %}" method="post">
+    {% csrf_token %}
+    <label for="book-title">Title:</label>
+    <input type="text" id="book-title" name="title" required />
+    <label for="book-authors">Authors:</label>
+    <select id="book-authors" name="authors" multiple required>
+      {% for author in authors %}
+      <option value="{{ author.author_id }}">{{ author.name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Add Book</button>
+  </form>
+</section>
+{% endblock %}

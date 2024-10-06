@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: book_service_client
+Version: 0.1.0
+Summary: Клиентская библиотека для работы с Book Service API
+Author: Osamo
+Author-email: osamo@tut.by
+Requires-Dist: requests
